@@ -1,0 +1,16 @@
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    align-items: center;
+    box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.25);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: #222;
+    color: white;
+}
+
+a {
+    height: fit-content;
+}
