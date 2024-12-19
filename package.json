@@ -12,10 +12,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
-    "react-wheel-of-prizes": "^1.1.0",
     "spin-wheel-game": "^1.0.3-alpha.3",
-    "web-vitals": "^2.1.4",
-    "winwheel": "^1.0.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
