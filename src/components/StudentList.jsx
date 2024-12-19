@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const StudentList = ({ students, setStudents }) => {
+const StudentList = ({ students, setStudents, showForm = true }) => {
   const [newStudent, setNewStudent] = useState('');
 
   const addStudent = () => {
@@ -11,18 +11,23 @@ const StudentList = ({ students, setStudents }) => {
   };
 
   return (
-    <div className="col-md-4">
+    <div className="col-md-4" style={{'width': '100%'}}>
       <h3>Студенты</h3>
-      <input
-        type="text"
-        className="form-control mb-2"
-        value={newStudent}
-        onChange={(e) => setNewStudent(e.target.value)}
-        placeholder="Введите имя студента"
-      />
-      <button onClick={addStudent} className="btn btn-primary mb-2">
-        Добавить
-      </button>
+      {showForm &&
+        <>
+          <input
+          type="text"
+          className="form-control mb-2"
+          value={newStudent}
+          onChange={(e) => setNewStudent(e.target.value)}
+          placeholder="Введите имя студента"
+        />
+        <button onClick={addStudent} className="btn btn-primary mb-2">
+          Добавить
+        </button>
+        </>
+
+      }
       <ul className="list-group mb-4">
         {students.map((student, index) => (
           <li key={index} className="list-group-item">

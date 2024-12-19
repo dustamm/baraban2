@@ -2,30 +2,46 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import CustomWheel from './components/CustomWheel';
 import Header from './components/Header/Header';
+import AnimatedStudentRandomiser from './components/animRandom/randomiser';
 
-let segments = [
-  { segmentText: 'Option 1', segColor: 'red' },
-  { segmentText: 'Option 2', segColor: 'blue' },
-  { segmentText: 'Option 4', segColor: 'green' },
-  { segmentText: 'Option 5', segColor: 'red' },
-  { segmentText: 'Option 6', segColor: 'blue' },
-  { segmentText: 'Option 7', segColor: 'green' },
-  { segmentText: 'Option 8', segColor: 'red' },
-  { segmentText: 'Option 9', segColor: 'blue' },
-  { segmentText: 'Option 10', segColor: 'green' },
-  { segmentText: 'Option 11', segColor: 'red' },
-  { segmentText: 'Option 12', segColor: 'blue' },
-  { segmentText: 'Option 13', segColor: 'green' },
-  { segmentText: 'Option 14', segColor: 'red' },
-  { segmentText: 'Option 15', segColor: 'blue' },
-  { segmentText: 'Option 16', segColor: 'green' },
-  { segmentText: 'Option 17', segColor: 'green' },
-  // Add more segments as needed
-]
 
 const App = () => {
-  const [spinnedQuestion, setSpinnedQuestion] = useState('')
-  const [questions, setQuestions] = useState(JSON.parse(localStorage.getItem('questions')) || []);
+  const [spinnedQuestion, setSpinnedQuestion] = useState("");
+  const [questions, setQuestions] = useState(
+    JSON.parse(localStorage.getItem("questions")) || []
+  );
+  const [students, setStudents] = useState(
+    JSON.parse(localStorage.getItem("students")) || []
+  );
+  const [remainingStudents, setRemainingStudents] = useState([...students]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [opacity, setOpacity] = useState("0");
+  const [bg] = useState(JSON.parse(localStorage.getItem('bg')))
+
+  const root = document.getElementById('body')
+  root.style.backgroundImage = bg === 0 ? 'url("/mountain.jpg")' : 'url("/procc.avif")'
+
+  useEffect(() => {
+    if (spinnedQuestion) {
+      setOpacity("100%");
+    }
+  }, [spinnedQuestion]);
+
+  const pickRandomStudent = () => {
+    if (remainingStudents.length === 0) {
+      setRemainingStudents([...students]);
+    }
+
+    const randomIndex = Math.floor(Math.random() * remainingStudents.length);
+    const chosenStudent = remainingStudents[randomIndex];
+
+    setSelectedStudent(chosenStudent);
+    console.log(chosenStudent)
+    setRemainingStudents((prev) =>
+      prev.filter((student) => student !== chosenStudent)
+    );
+  };
+
 
   return (
     <>
@@ -34,19 +50,27 @@ const App = () => {
         <div className="row d-flex align-items-center">
           {/* Wheel on the left */}
           <div className="col-md-6 mb-4 mb-md-0">
-            <CustomWheel setQuestion={setSpinnedQuestion} segments={questions} />
+            <CustomWheel
+              setQuestion={setSpinnedQuestion}
+              onSpin={pickRandomStudent} 
+              segments={questions}
+            />
           </div>
 
           {/* Spinned question on the right */}
-          <div className="col-md-6">
-            <div className="p-4 bg-light rounded shadow">
-              <h2 className="mb-3 text-primary">Question:</h2>
-              <p className="fs-4 fw-bold text-dark">{spinnedQuestion || 'Spin the wheel to see your question!'}</p>
+          <div
+            className="col-md-6"
+            style={{ opacity: opacity, transition: "all 0.3s" }}
+          >
+            <div className="p-4   shadow text-white ques-bara">
+              <p className="fs-4 fw-bold text-white text-center">
+                {spinnedQuestion || "Spin the wheel to see your question!"}
+              </p>
             </div>
+            <AnimatedStudentRandomiser selectedStudent={selectedStudent} />
           </div>
         </div>
       </div>
-
     </>
   );
 };

@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.ques-bara {
+  border-radius: 30px;
+  background-color: rgba(67, 67, 233, 0.678);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

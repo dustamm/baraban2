@@ -21,10 +21,11 @@ import { SpinWheel } from 'spin-wheel-game';
 //   // Add more segments as needed
 // ];
 
-export default function MySpinWheel({setQuestion, segments})  {
+export default function MySpinWheel({setQuestion, onSpin, segments})  {
     const handleSpinFinish = (result) => {
         setQuestion(result)
         segments = segments.filter(item => item.segmentText !== result)
+        onSpin()
     };
   
     const spinWheelProps = {

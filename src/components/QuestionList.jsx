@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
+import getRandomColor from '../utils/randomColor';
 
-function getRandomColor() {
-  // Generate a random hex color by picking random values for R, G, and B
-  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
-}
-
-const QuestionList = ({ questions, setQuestions }) => {
+const QuestionList = ({ questions, setQuestions, showForm = true }) => {
   const [newQuestion, setNewQuestion] = useState('');
 
   const addQuestion = () => {
@@ -17,9 +13,11 @@ const QuestionList = ({ questions, setQuestions }) => {
   };
 
   return (
-    <div className="col-md-4">
+    <div className="col-md-4" style={{'width': '100%'}}>
       <h3>Вопросы</h3>
-      <input
+      {showForm &&
+        <>
+          <input
         type="text"
         className="form-control mb-2"
         value={newQuestion}
@@ -27,8 +25,11 @@ const QuestionList = ({ questions, setQuestions }) => {
         placeholder="Напишите вопрос"
       />
       <button onClick={addQuestion} className="btn btn-primary mb-2">
-        Добавить
-      </button>
+      Добавить
+    </button>
+        </>
+      }
+    
       <ul className="list-group mb-4">
         {questions.map((question, index) => (
           <li key={index} className="list-group-item bg-secondary text-white">
