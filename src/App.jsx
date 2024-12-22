@@ -7,10 +7,10 @@ import AnimatedStudentRandomiser from './components/animRandom/randomiser';
 
 const App = () => {
   const [spinnedQuestion, setSpinnedQuestion] = useState("");
-  const [questions, setQuestions] = useState(
+  const [questions] = useState(
     JSON.parse(localStorage.getItem("questions")) || []
   );
-  const [students, setStudents] = useState(
+  const [students] = useState(
     JSON.parse(localStorage.getItem("students")) || []
   );
   const [remainingStudents, setRemainingStudents] = useState([...students]);
