@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { SpinWheel } from 'spin-wheel-game';
 
 // let segments = [
