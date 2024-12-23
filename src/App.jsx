@@ -36,12 +36,14 @@ const App = () => {
     const chosenStudent = remainingStudents[randomIndex];
 
     setSelectedStudent(chosenStudent);
-    console.log(chosenStudent)
     setRemainingStudents((prev) =>
       prev.filter((student) => student !== chosenStudent)
     );
   };
-
+  
+  const putQuestion = (res) => {
+    setSpinnedQuestion(questions.filter(item => item.segmentText === res)[0])
+  } 
 
   return (
     <>
@@ -51,7 +53,7 @@ const App = () => {
           {/* Wheel on the left */}
           <div className="col-md-6 mb-4 mb-md-0">
             <CustomWheel
-              setQuestion={setSpinnedQuestion}
+              setQuestion={putQuestion}
               onSpin={pickRandomStudent} 
               segments={questions}
             />
@@ -64,7 +66,12 @@ const App = () => {
           >
             <div className="p-4   shadow text-white ques-bara">
               <p className="fs-4 fw-bold text-white text-center">
-                {spinnedQuestion || "Spin the wheel to see your question!"}
+                {spinnedQuestion.segmentText || "Spin the wheel to see your question!"}
+                {spinnedQuestion.image && <img
+                      src={spinnedQuestion.image}
+                      alt="Question"
+                      style={{ maxWidth: '60%', maxHeight: '50%', objectFit: 'cover' }}
+                    />}
               </p>
             </div>
             <AnimatedStudentRandomiser selectedStudent={selectedStudent} />

@@ -41,6 +41,7 @@ export default function Panel() {
 
   return (
     <div className="container mt-5">
+      <a href="/" className='btn btn-primary mb-5'>Ба кафо</a>
       <div className="row mb-4">
         <div className="col-md-6">
           <QuestionList questions={questions} setQuestions={setQuestions} showForm={false} />
@@ -58,7 +59,7 @@ export default function Panel() {
           ))}
         </div>
         <button className="btn btn-success mt-3" onClick={() => setIsModalOpen(true)}>
-          Add Group +
+          Дохили гурух +
         </button>
       </div>
 

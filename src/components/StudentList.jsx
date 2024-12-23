@@ -17,7 +17,7 @@ const StudentList = ({ students, setStudents, showForm = true }) => {
 
   return (
     <div className="col-md-4" style={{ 'width': '100%' }}>
-      <h3>Студенты</h3>
+      <h3>Донишчуен</h3>
       {showForm && (
         <>
           <input
@@ -25,10 +25,10 @@ const StudentList = ({ students, setStudents, showForm = true }) => {
             className="form-control mb-2"
             value={newStudent}
             onChange={(e) => setNewStudent(e.target.value)} 
-            placeholder="Введите имя студента"
+            placeholder="Номи донишчуро нависед"
           />
           <button onClick={addStudent} className="btn btn-primary mb-2">
-            Добавить
+            Дохил кардан
           </button>
         </>
       )}
